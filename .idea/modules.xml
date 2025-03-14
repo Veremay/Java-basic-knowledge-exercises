@@ -20,6 +20,7 @@
       <module fileurl="file://$PROJECT_DIR$/03OOP/Singleton/Singleton.iml" filepath="$PROJECT_DIR$/03OOP/Singleton/Singleton.iml" />
       <module fileurl="file://$PROJECT_DIR$/03OOP/SmallChangeProject/SmallChangeProject.iml" filepath="$PROJECT_DIR$/03OOP/SmallChangeProject/SmallChangeProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/03OOP/Static/Static.iml" filepath="$PROJECT_DIR$/03OOP/Static/Static.iml" />
+      <module fileurl="file://$PROJECT_DIR$/07CommonClasses/String/String.iml" filepath="$PROJECT_DIR$/07CommonClasses/String/String.iml" />
     </modules>
   </component>
 </project>
