@@ -9,13 +9,16 @@
       <module fileurl="file://$PROJECT_DIR$/05Collections/05Collections.iml" filepath="$PROJECT_DIR$/05Collections/05Collections.iml" />
       <module fileurl="file://$PROJECT_DIR$/06Exception/06Exception.iml" filepath="$PROJECT_DIR$/06Exception/06Exception.iml" />
       <module fileurl="file://$PROJECT_DIR$/07CommonClasses/07CommonClasses.iml" filepath="$PROJECT_DIR$/07CommonClasses/07CommonClasses.iml" />
+      <module fileurl="file://$PROJECT_DIR$/07CommonClasses/Arrays/Arrays.iml" filepath="$PROJECT_DIR$/07CommonClasses/Arrays/Arrays.iml" />
       <module fileurl="file://$PROJECT_DIR$/BasicKnowledge.iml" filepath="$PROJECT_DIR$/BasicKnowledge.iml" />
+      <module fileurl="file://$PROJECT_DIR$/07CommonClasses/Date/Date.iml" filepath="$PROJECT_DIR$/07CommonClasses/Date/Date.iml" />
       <module fileurl="file://$PROJECT_DIR$/03OOP/ExtendsVSInterface/ExtendsVSInterface.iml" filepath="$PROJECT_DIR$/03OOP/ExtendsVSInterface/ExtendsVSInterface.iml" />
       <module fileurl="file://$PROJECT_DIR$/03OOP/HouseRentProject/HouseRentProject.iml" filepath="$PROJECT_DIR$/03OOP/HouseRentProject/HouseRentProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/03OOP/Inheritance/Inheritance.iml" filepath="$PROJECT_DIR$/03OOP/Inheritance/Inheritance.iml" />
       <module fileurl="file://$PROJECT_DIR$/03OOP/InnerClass/InnerClass.iml" filepath="$PROJECT_DIR$/03OOP/InnerClass/InnerClass.iml" />
       <module fileurl="file://$PROJECT_DIR$/03OOP/Interfaces/Interfaces.iml" filepath="$PROJECT_DIR$/03OOP/Interfaces/Interfaces.iml" />
       <module fileurl="file://$PROJECT_DIR$/02ClassesObjects/LuckyDiceAdventure/LuckyDiceAdventure.iml" filepath="$PROJECT_DIR$/02ClassesObjects/LuckyDiceAdventure/LuckyDiceAdventure.iml" />
+      <module fileurl="file://$PROJECT_DIR$/07CommonClasses/Math/Math.iml" filepath="$PROJECT_DIR$/07CommonClasses/Math/Math.iml" />
       <module fileurl="file://$PROJECT_DIR$/03OOP/Polymorphism/Polymorphism.iml" filepath="$PROJECT_DIR$/03OOP/Polymorphism/Polymorphism.iml" />
       <module fileurl="file://$PROJECT_DIR$/03OOP/Singleton/Singleton.iml" filepath="$PROJECT_DIR$/03OOP/Singleton/Singleton.iml" />
       <module fileurl="file://$PROJECT_DIR$/03OOP/SmallChangeProject/SmallChangeProject.iml" filepath="$PROJECT_DIR$/03OOP/SmallChangeProject/SmallChangeProject.iml" />
