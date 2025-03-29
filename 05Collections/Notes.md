@@ -3,7 +3,7 @@
 
 ```
 Collection
-├── List
+├── ListClass
 │   ├── ArrayList
 │   ├── LinkedList
 │   ├── Vector
@@ -16,12 +16,12 @@ Collection
     ├── PriorityQueue
     └── Deque
         ├── ArrayDeque
-        └── LinkedList (implements both List and Deque)
+        └── LinkedList (implements both ListClass and Deque)
 
 ```
 
 
-# List Interface
+# ListClass Interface
 
 List是一个有序的集合，允许重复，并提供位置访问。
 

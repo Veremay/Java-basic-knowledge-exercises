@@ -1,9 +1,7 @@
-package List.ArrayList;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArrayListMethod {
+public class CollectionsMethod {
     public static void main(String[] args) {
         List list = new ArrayList(); //ArrayList是接口，接口不能实例化，所以要向上转型
         //1.添加元素
