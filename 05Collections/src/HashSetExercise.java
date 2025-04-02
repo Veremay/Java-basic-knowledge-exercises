@@ -1,4 +1,5 @@
 import java.util.HashSet;
+import java.util.Objects;
 
 public class HashSetExercise {
     /*
@@ -11,6 +12,8 @@ public class HashSetExercise {
         employees.add(new Employee("May", 23));
         employees.add(new Employee("Sheeran", 26));
         employees.add(new Employee("May", 23));
+
+        System.out.println(employees);
     }
 
     static class Employee{
@@ -20,6 +23,27 @@ public class HashSetExercise {
         public Employee(String name, int age) {
             this.name = name;
             this.age = age;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Employee employee = (Employee) o;
+            return age == employee.age && Objects.equals(name, employee.name);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(name, age);
+        }
+
+        @Override
+        public String toString() {
+            return "Employee{" +
+                    "name='" + name + '\'' +
+                    ", age=" + age +
+                    '}';
         }
     }
 }
