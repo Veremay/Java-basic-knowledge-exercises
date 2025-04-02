@@ -3,7 +3,7 @@
 
 ```
 Collection
-├── ListClass
+├── List
 │   ├── ArrayList
 │   ├── LinkedList
 │   ├── Vector
