@@ -21,6 +21,8 @@ public class GenericsExercise {
         employees.add(new Employee("emma", 10000,new MyDate(2002,9,17)));
         employees.add(new Employee("may", 15000,new MyDate(2005,2,24)));
 
+
+
         employees.sort(new Comparator<Employee>() {
             @Override
             public int compare(Employee e1, Employee e2) {
@@ -35,6 +37,10 @@ public class GenericsExercise {
                     return name_diff;
                 }
 
+                return e1.getBirthday().compareTo(e2.getBirthday());
+                // IMPORTANT!!!
+                // 下面是对birthday的比较，因此，我们最好把这个比较，放在MyDate类完成
+        /*
                 // 比较birthday
                 int year_diff = e1.getBirthday().getYear() - e2.getBirthday().getYear();
                 if(year_diff != 0){
@@ -48,8 +54,12 @@ public class GenericsExercise {
 
                 return e1.getBirthday().getDay() - e2.getBirthday().getDay();
 
+         */
+
             }
         });
+
+
 
         System.out.println(employees);
     }
@@ -103,7 +113,7 @@ class Employee{
     }
 }
 
-class MyDate{
+class MyDate implements Comparable<MyDate>{
     private int year;
     private int month;
     private int day;
@@ -145,5 +155,21 @@ class MyDate{
                 ", month='" + month + '\'' +
                 ", day='" + day + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(MyDate o) {
+        // 比较birthday
+        int year_diff = this.year - o.getYear();
+        if(year_diff != 0){
+            return year_diff;
+        }
+
+        int month_diff = this.month - o.getMonth();
+        if(month_diff != 0){
+            return month_diff;
+        }
+
+        return this.day - o.getDay();
     }
 }
