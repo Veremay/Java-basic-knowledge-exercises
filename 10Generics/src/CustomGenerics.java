@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class CustomGenerics {
     public static void main(String[] args) {
         // 实体化泛型类，同时赋予泛型实值
@@ -11,6 +14,9 @@ public class CustomGenerics {
         james.setAge("9");
         System.out.println(james);
 
+        john.f1("healthy", 7);
+        Tiger<String, ArrayList, HashMap> lucy = new Tiger<>("lucy");
+        lucy.hello("nice to meet you", new ArrayList());
     }
 }
 
@@ -66,6 +72,17 @@ class Tiger<R,M,T>{
 
     public void setAge(T age) {
         this.age = age;
+    }
+
+    public <T,S> void f1(T t,S s){
+        System.out.println(t.getClass());   //参考下面第三点，类型输出为String
+        System.out.println(s.getClass());   //Integer
+    }
+
+    //泛型方法，可以使用类声明的泛型，也可以使用自己声明泛型
+    public<K> void hello(R r, K k){
+        System.out.println(r.getClass());
+        System.out.println(k.getClass());
     }
 
     @Override
