@@ -11,18 +11,72 @@
 创建 DAO 类的对象，分别调用其 save、get、update、list、delete 方法来操作 User 对象使用 Junit 单元测试类进行测试。
  */
 
+import org.junit.Test;
+
+import java.util.*;
+
 public class JUnitExercise {
+    public static void main(String[] args) {
+
+    }
+
+    @Test
+    public void testList() {
+        //说明
+        //这里我们给T 指定类型是User
+        DAO<User> dao = new DAO<>();
+        dao.save("001", new User(1, 10, "jack"));
+        dao.save("002", new User(2, 14, "may"));
+
+        List<User> list = dao.list();
+        System.out.println("list=" + list);
+    }
 }
 
-class DAO<T>{
+class DAO<T> {
+    private Map<String, T> map = new HashMap<>();
 
+    public T get(String id) {
+        return map.get(id);
+    }
+
+    public void update(String id, T entity) {
+        map.put(id, entity);
+    }
+
+    //返回map 中存放的所有T对象
+    // 遍历map[k-v],将map的 所有value(T entity),封装到ArrayList返回即可
+    public List<T> list() {
+        //创建 Arraylist
+        List<T> list = new ArrayList<>();
+        //遍历map
+        Set<String> keySet = map.keySet();
+        for (String key : keySet) {
+            list.add(map.get(key));//也可以直接使用本类的 get(string id)
+        }
+        return list;
+    }
+
+    public void delete(String id) {
+        map.remove(id);
+    }
+
+    public void save(String id, T entity) {//把entity保存到map
+        map.put(id, entity);
+    }
 }
 
 
-class User{
+class User {
     private int id;
     private int age;
     private String name;
+
+    public User(int id, int age, String name) {
+        this.id = id;
+        this.age = age;
+        this.name = name;
+    }
 
     public int getId() {
         return id;
