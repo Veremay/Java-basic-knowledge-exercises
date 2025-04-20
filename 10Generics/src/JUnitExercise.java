@@ -30,6 +30,12 @@ public class JUnitExercise {
 
         List<User> list = dao.list();
         System.out.println("list=" + list);
+
+        dao.update("001", new User(3, 58, "milan"));
+        System.out.println("===修改后====");
+        list = dao.list();
+        System.out.println("list=" + list);
+        dao.delete("001");
     }
 }
 
