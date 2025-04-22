@@ -35,7 +35,15 @@ public class JUnitExercise {
         System.out.println("===修改后====");
         list = dao.list();
         System.out.println("list=" + list);
+
         dao.delete("001");
+        list = dao.list();
+        System.out.println("list=" + list);
+
+        dao.get("002");
+        list = dao.list();
+        System.out.println("list=" + list);
+
     }
 }
 

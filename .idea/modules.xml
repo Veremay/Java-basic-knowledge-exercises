@@ -12,6 +12,7 @@
       <module fileurl="file://$PROJECT_DIR$/08Map/08Map.iml" filepath="$PROJECT_DIR$/08Map/08Map.iml" />
       <module fileurl="file://$PROJECT_DIR$/09Collections/09Collections.iml" filepath="$PROJECT_DIR$/09Collections/09Collections.iml" />
       <module fileurl="file://$PROJECT_DIR$/10Generics/10Generics.iml" filepath="$PROJECT_DIR$/10Generics/10Generics.iml" />
+      <module fileurl="file://$PROJECT_DIR$/11Threads/11Threads.iml" filepath="$PROJECT_DIR$/11Threads/11Threads.iml" />
       <module fileurl="file://$PROJECT_DIR$/06CommonClasses/Arrays/Arrays.iml" filepath="$PROJECT_DIR$/06CommonClasses/Arrays/Arrays.iml" />
       <module fileurl="file://$PROJECT_DIR$/BasicKnowledge.iml" filepath="$PROJECT_DIR$/BasicKnowledge.iml" />
       <module fileurl="file://$PROJECT_DIR$/06CommonClasses/Date/Date.iml" filepath="$PROJECT_DIR$/06CommonClasses/Date/Date.iml" />
@@ -27,6 +28,7 @@
       <module fileurl="file://$PROJECT_DIR$/03OOP/SmallChangeProject/SmallChangeProject.iml" filepath="$PROJECT_DIR$/03OOP/SmallChangeProject/SmallChangeProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/03OOP/Static/Static.iml" filepath="$PROJECT_DIR$/03OOP/Static/Static.iml" />
       <module fileurl="file://$PROJECT_DIR$/06CommonClasses/String/String.iml" filepath="$PROJECT_DIR$/06CommonClasses/String/String.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TankGame/TankGame.iml" filepath="$PROJECT_DIR$/TankGame/TankGame.iml" />
     </modules>
   </component>
 </project>
