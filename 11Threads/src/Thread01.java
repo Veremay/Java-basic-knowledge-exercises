@@ -34,7 +34,7 @@ class Cat extends Thread {
         while (true) { // 不停地做
             if (times == 8)
                 break;
-            System.out.println("小猫叫 " + "线程：" + Thread.currentThread().getName());
+            System.out.println("小猫叫 " + times + "线程：" + Thread.currentThread().getName());
             // 快捷键ctrl + alt + t
             try {
                 Thread.sleep(1000);    //休眠一秒钟
