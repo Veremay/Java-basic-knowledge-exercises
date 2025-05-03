@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class FileReader_ {
     public static void main(String[] args) {
-        String filePath = "./test.txt";
+        String filePath = "12IO_Flow/test.txt";
         FileReader fileReader = null;
         int data = 0;
 
