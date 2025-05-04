@@ -22,7 +22,7 @@ public class ObjectOutputStream_ {
 class Dog implements Serializable {
     private int age;
     private String name;
-    private static final long serialVersionUID = 1;   //版本控制，当该类出现修改时，无需重新序列化和反序列化
+    private static final long serialVersionUID = 1L;   //serialVersionUID 序列化的版本号，可以提高兼容性。版本控制，当该类出现修改时，无需重新序列化和反序列化
     private transient String color;
     private static int add;
 
