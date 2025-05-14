@@ -1,12 +1,10 @@
 package SocketTCP;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class SocketTCP_Server {
+public class SocketTCP_Server_char {
     public static void main(String[] args) throws IOException {
         ServerSocket serverSocket = new ServerSocket(9999);
         System.out.println("9999端口已建立，等待连接...");
@@ -15,21 +13,23 @@ public class SocketTCP_Server {
         //3.通过socket.getInputStream()读取客户端写入到数据通道的数据，显示
         InputStream inputStream = socket.getInputStream();
         //4.IO读取
-        byte[] buffer = new byte[1024];
-        int readLen = 0;
-        while ((readLen = inputStream.read(buffer)) != -1) {
-            //根据读取到的实际长度，显示内容
-            System.out.println(new String(buffer, 0, readLen));
-        }
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        String s = bufferedReader.readLine();
+        System.out.println(s);//输出
         //5.获取socket相关联的输出流
         OutputStream outputStream = socket.getOutputStream();
-        outputStream.write("hello,client".getBytes());
-        // 设置结束标记
-        socket.shutdownOutput();
+        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
+        bufferedWriter.write("hello, client 字符流");
+        bufferedWriter.newLine();//插入换行符，表示写入结束
+        bufferedWriter.flush();
+//        // 不需要结束标记
+//        socket.shutdownOutput();
         //6.关闭流和socket
-        inputStream.close();
+        bufferedReader.close();//关闭外层流
         socket.close();
         serverSocket.close();
-        outputStream.close();
+        bufferedWriter.close();
+        System.out.println("服务端退出...");
+
     }
 }
