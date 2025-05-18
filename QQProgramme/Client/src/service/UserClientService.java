@@ -15,7 +15,7 @@ import java.net.UnknownHostException;
     该类完成用户登录验证和注册等功能
  */
 public class UserClientService {
-    private boolean isValid = true;
+    private boolean isValid = false;
     private User user = new User(); //可能会在其他地方用到user信息，因此变成一个成员属性
     private Socket socket; //可能在其他地方也会使用到
 
