@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class User implements Serializable {
     //通过数据通道传输则需要实现serializable
     //提高兼容性
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
     private String userId;
 
     public String getPasswd() {
@@ -29,10 +29,11 @@ public class User implements Serializable {
 
     private String passwd;
 
-    public User(String passwd, String userId) {
+    public User(String userId, String passwd) {
         this.passwd = passwd;
         this.userId = userId;
     }
 
-    public User(){ }
+    public User() {
+    }
 }

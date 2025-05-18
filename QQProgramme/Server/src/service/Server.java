@@ -9,12 +9,41 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 /*
     这是服务器，在监听9999，等待客户端的连接，并保持通信
  */
 public class Server {
-    private ServerSocket serverSocket= null;
+    private ServerSocket serverSocket = null;
+    //创建一个集合，存放多个用户
+    //这里也可以使用并发集合，没有线程安全问题 ConcurrentHashMap
+//    private static HashMap<String, User> validUsers = new HashMap<>();
+    private static ConcurrentHashMap<String, User> validUsers = new ConcurrentHashMap<>();
+
+    static { //静态代码块，初始化
+        validUsers.put("100", new User("100", "123456"));
+        validUsers.put("may", new User("may", "123456"));
+        validUsers.put("amy", new User("amy", "123456"));
+        validUsers.put("lucy", new User("lucy", "123456"));
+        validUsers.put("sherry", new User("sherry", "123456"));
+
+    }
+
+    //验证用户是否有效
+    private boolean checkUser(String userId, String pwd) {
+        User user = validUsers.get(userId);
+        if (user == null) {
+            System.out.println("user不存在");
+            return false;
+        }
+        if (!user.getPasswd().equals(pwd)) {
+            System.out.println("密码错误");
+            return false;
+        }
+        return true;
+    }
 
     public Server() {
 
@@ -23,7 +52,7 @@ public class Server {
             System.out.println("服务端在9999端口监听");
             serverSocket = new ServerSocket(9999);
             //监听的行为是个持续的过程
-            while(true){
+            while (true) {
                 Socket socket = serverSocket.accept(); //如果没有客户端连接，就会阻塞
 
                 //得到socket关联的对象输入流
@@ -37,7 +66,7 @@ public class Server {
                 Message message = new Message();
                 //验证
                 //照理说是应该去数据库里查找的，但这里先写死了
-                if(user.getUserId().equals("100") && user.getPasswd().equals("123456")) {
+                if (checkUser(user.getUserId(), user.getPasswd())) {
                     //验证通过
                     message.setMessageType(MessageType.MESSAGE_LOGIN_SUCCEED);
                     //将message对象回复给客户端
@@ -48,8 +77,9 @@ public class Server {
                     //把线程对象放入一个集合中进行管理
                     ManageServerConnectClientThread.addClientThread(user.getUserId(), serverConnectClientThread);
 
-                }else{
+                } else {
                     //验证失败
+                    System.out.println("用户 id=" + user.getUserId() + " 登录失败...");
                     message.setMessageType(MessageType.MESSAGE_LOGIN_FAIL);
                     oos.writeObject(message);
                     socket.close();
@@ -58,7 +88,7 @@ public class Server {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             //如果服务器退出了while，说明服务器不再监听，因此需要关闭serverSocket
             try {
                 serverSocket.close();
