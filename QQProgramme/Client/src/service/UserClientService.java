@@ -54,4 +54,26 @@ public class UserClientService {
         }
         return isValid;
     }
+
+    //向服务器请求在线用户列表
+    public void getOnlineFriendList(){
+        //发送一个消息，类型是请求在线用户列表
+        Message message = new Message();
+        message.setMessageType(MessageType.MESSAGE_RETURN_ONLINE_FRIEND);
+        message.setSender(user.getUserId());
+
+        //发送给服务器
+        try {
+            //从管理线程的集合中取得线程
+            ClientConnectServerThread clientConnectServerThread = ManageClientConnectServerThread.getClientConnectServerThread(user.getUserId());
+            //得到当前线程socket对应的ObjectInputStream对象
+            Socket socket1 = clientConnectServerThread.getSocket();
+            ObjectOutputStream oos =
+                    new ObjectOutputStream(socket1.getOutputStream());
+            oos.writeObject(message);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

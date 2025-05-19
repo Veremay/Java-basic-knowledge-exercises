@@ -61,6 +61,8 @@ public class MainView {
 
             switch (key) {
                 case "1":
+                    // TODO 写一个方法获取在线用户列表
+                    userClientService.getOnlineFriendList();
                     System.out.println("显示在线用户");
                     break;
                 case "2":
