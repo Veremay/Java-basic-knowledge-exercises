@@ -61,7 +61,7 @@ public class MainView {
 
             switch (key) {
                 case "1":
-                    // TODO 写一个方法获取在线用户列表
+                    // 写一个方法获取在线用户列表
                     userClientService.getOnlineFriendList();
                     System.out.println("显示在线用户");
                     break;
@@ -76,6 +76,7 @@ public class MainView {
                     break;
                 case "9":
                     System.out.println("退出系统");
+                    userClientService.exit();
                     secondaryLoop = false; // 退出二级菜单
                     loop = false;          // 退出主菜单
                     break;

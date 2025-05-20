@@ -13,8 +13,14 @@ public class ManageClientConnectServerThread {
     public static void addClientConnectServerThread(String userId, ClientConnectServerThread clientConnectServerThread) {
         hm.put(userId, clientConnectServerThread);
     }
+
     //通过UserId得到对应线程
-    public static ClientConnectServerThread getClientConnectServerThread(String userId){
+    public static ClientConnectServerThread getClientConnectServerThread(String userId) {
         return hm.get(userId);
+    }
+
+    //将某个线程移出集合
+    public static void deleteClientConnectServerThread(String userId) {
+        hm.remove(userId);
     }
 }

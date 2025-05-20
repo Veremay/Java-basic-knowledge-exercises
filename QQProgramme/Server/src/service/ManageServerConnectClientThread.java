@@ -18,6 +18,11 @@ public class ManageServerConnectClientThread {
         return hm.get(userId);
     }
 
+    //从hm集合移出线程对象
+    public static void deleteClientThread(String userId){
+        hm.remove(userId);
+    }
+
     //返回在线用户列表的方法
     //格式： 100 200 紫霞仙子
     public static String getOnlineFriend(){
