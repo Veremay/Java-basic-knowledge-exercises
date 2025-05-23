@@ -50,6 +50,8 @@ public class Server {
         try {
             //端口其实可以写在一个配置文件中
             System.out.println("服务端在9999端口监听");
+            //启动推送消息的线程
+            new Thread(new SendNoticeToAllService()).start();
             serverSocket = new ServerSocket(9999);
             //监听的行为是个持续的过程
             while (true) {
