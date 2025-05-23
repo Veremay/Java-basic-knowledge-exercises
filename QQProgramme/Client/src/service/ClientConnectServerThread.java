@@ -12,6 +12,7 @@ public class ClientConnectServerThread extends Thread {
     //该线程需要持有socket
     private Socket socket;
 
+
     //构造器可以接收一个socket对象
     public ClientConnectServerThread(Socket socket) {
         this.socket = socket;

@@ -9,6 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -21,6 +22,7 @@ public class Server {
     //这里也可以使用并发集合，没有线程安全问题 ConcurrentHashMap
 //    private static HashMap<String, User> validUsers = new HashMap<>();
     private static ConcurrentHashMap<String, User> validUsers = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, ArrayList<Message>> offlineDB = new ConcurrentHashMap<>();
 
     static { //静态代码块，初始化
         validUsers.put("100", new User("100", "123456"));
@@ -30,6 +32,7 @@ public class Server {
         validUsers.put("sherry", new User("sherry", "123456"));
 
     }
+
 
     //验证用户是否有效
     private boolean checkUser(String userId, String pwd) {
@@ -43,6 +46,17 @@ public class Server {
             return false;
         }
         return true;
+    }
+
+    //添加离线消息到数据库
+    public static void addOfflineMessage(Message message) {
+        String receiver = message.getReceiver();
+        offlineDB.computeIfAbsent(receiver, k -> new ArrayList<>()).add(message);
+    }
+
+    //获取并清除用户的离线消息
+    public static ArrayList<Message> getAndClearOfflineMessages(String userId) {
+        return offlineDB.remove(userId);
     }
 
     public Server() {
@@ -78,7 +92,15 @@ public class Server {
                     serverConnectClientThread.start();
                     //把线程对象放入一个集合中进行管理
                     ManageServerConnectClientThread.addClientThread(user.getUserId(), serverConnectClientThread);
-
+                    //检查是否有离线消息
+                    ArrayList<Message> offlineMessages = getAndClearOfflineMessages(user.getUserId());
+                    if (offlineMessages != null && !offlineMessages.isEmpty()) {
+                        System.out.println("有发送离线消息给用户 " + user.getUserId());
+                        for (Message offlineMessage : offlineMessages) {
+                            ObjectOutputStream oos1 = new ObjectOutputStream(socket.getOutputStream());
+                            oos1.writeObject(offlineMessage);
+                        }
+                    }
                 } else {
                     //验证失败
                     System.out.println("用户 id=" + user.getUserId() + " 登录失败...");

@@ -55,16 +55,26 @@ public class ServerConnectClientThread extends Thread {
                     break;
                 } else if (message.getMessageType().equals(MessageType.MESSAGE_COMM_MES)) {
                     System.out.println(message.getSender() + "请求发送消息给" + message.getReceiver());
-                    //返回给客户端
-                    ObjectOutputStream oos =
-                            new ObjectOutputStream(
-                                    ManageServerConnectClientThread.
-                                            getServerConnectClientThread(message.getReceiver()).
-                                            getSocket().
-                                            getOutputStream());
-                    oos.writeObject(message); // 转发
+//                    //返回给客户端
+//                    ObjectOutputStream oos =
+//                            new ObjectOutputStream(
+//                                    ManageServerConnectClientThread.
+//                                            getServerConnectClientThread(message.getReceiver()).
+//                                            getSocket().
+//                                            getOutputStream());
+//                    oos.writeObject(message); // 转发
                     // TODO 如果用户不在线，可以保存到数据库
-
+                    //检查接收者是否在线
+                    ServerConnectClientThread receiverThread = ManageServerConnectClientThread.getServerConnectClientThread(message.getReceiver());
+                    if (receiverThread != null) {
+                        //接收者在线，直接转发消息
+                        ObjectOutputStream oos = new ObjectOutputStream(receiverThread.getSocket().getOutputStream());
+                        oos.writeObject(message);
+                    } else {
+                        //接收者不在线，存储到离线消息数据库
+                        Server.addOfflineMessage(message);
+                        System.out.println("用户 " + message.getReceiver() + " 离线，消息已存储");
+                    }
                 } else if (message.getMessageType().equals(MessageType.MESSAGE_TOALL_MES)) {
                     //需要遍历管理线程的集合，把所有线程都得到，然后转发message
                     HashMap<String, ServerConnectClientThread> hm = ManageServerConnectClientThread.getHm();
@@ -84,13 +94,24 @@ public class ServerConnectClientThread extends Thread {
 
                 } else if (message.getMessageType().equals(MessageType.MESSAGE_FILE_MES)) {
                     System.out.println(message.getSender() + "请求发送文件给" + message.getReceiver());
-                    //返回给客户端
-                    ObjectOutputStream oos =
-                            new ObjectOutputStream(
-                                    ManageServerConnectClientThread.
-                                            getServerConnectClientThread(
-                                                    message.getReceiver()).getSocket().getOutputStream());
-                    oos.writeObject(message); // 转发
+//                    //返回给客户端
+//                    ObjectOutputStream oos =
+//                            new ObjectOutputStream(
+//                                    ManageServerConnectClientThread.
+//                                            getServerConnectClientThread(
+//                                                    message.getReceiver()).getSocket().getOutputStream());
+//                    oos.writeObject(message); // 转发
+                    //检查接收者是否在线
+                    ServerConnectClientThread receiverThread = ManageServerConnectClientThread.getServerConnectClientThread(message.getReceiver());
+                    if (receiverThread != null) {
+                        //接收者在线，直接转发文件
+                        ObjectOutputStream oos = new ObjectOutputStream(receiverThread.getSocket().getOutputStream());
+                        oos.writeObject(message);
+                    } else {
+                        //接收者不在线，存储到离线消息数据库
+                        Server.addOfflineMessage(message);
+                        System.out.println("用户 " + message.getReceiver() + " 不在线，文件已存储");
+                    }
                 } else {
                     System.out.println("其他消息类型...");
                 }
