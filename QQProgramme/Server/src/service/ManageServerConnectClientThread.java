@@ -34,4 +34,8 @@ public class ManageServerConnectClientThread {
         }
         return onlineUserList;
     }
+
+    public static HashMap<String, ServerConnectClientThread> getHm(){
+        return hm;
+    }
 }

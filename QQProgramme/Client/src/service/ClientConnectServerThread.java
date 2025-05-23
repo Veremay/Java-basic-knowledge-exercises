@@ -41,7 +41,11 @@ public class ClientConnectServerThread extends Thread {
                     //退出while循环，结束run()方法
                     break;
                 } else if (message.getMessageType().equals(MessageType.MESSAGE_COMM_MES)) {
-                    System.out.println("\n" + message.getSender() + "对" + message.getReceiver() + "说：" + message.getContent());
+                    System.out.println("\n" + message.getSender() + "对你说：" + message.getContent());
+
+                } else if (message.getMessageType().equals(MessageType.MESSAGE_TOALL_MES)) {
+                    //
+                    System.out.println("\n" + message.getSender() + "对大家说：" + message.getContent());
 
                 } else {
                     System.out.println("其他类型message");

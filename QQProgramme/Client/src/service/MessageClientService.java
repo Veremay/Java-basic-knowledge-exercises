@@ -26,7 +26,7 @@ public class MessageClientService {
         message.setReceiver(receiverId);
         message.setContent(content);
         message.setSendTime(new Date().toString());
-        System.out.println(senderId + "对" + receiverId + "说：" + content);
+        System.out.println("你对" + receiverId + "说：" + content);
         //发送给服务端
         try {
             ObjectOutputStream oos =
@@ -37,6 +37,22 @@ public class MessageClientService {
         }
     }
 
-
+    public void sendMessageToAll(String content, String senderId){
+        //构建message
+        Message message = new Message();
+        message.setMessageType(MessageType.MESSAGE_TOALL_MES);
+        message.setSender(senderId);
+        message.setContent(content);
+        message.setSendTime(new Date().toString());
+        System.out.println("你对大家说：" + content);
+        //发送给服务端
+        try {
+            ObjectOutputStream oos =
+                    new ObjectOutputStream(ManageClientConnectServerThread.getClientConnectServerThread(senderId).getSocket().getOutputStream());
+            oos.writeObject(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Iterator;
 
 /*
     该类对应的一个对象和某个客户端保持通信
@@ -66,6 +68,24 @@ public class ServerConnectClientThread extends Thread{
                                             getOutputStream());
                     oos.writeObject(message); // 转发
                     // TODO 如果用户不在线，可以保存到数据库
+
+                }
+                else if (message.getMessageType().equals(MessageType.MESSAGE_TOALL_MES)) {
+                    //需要遍历管理线程的集合，把所有线程都得到，然后转发message
+                    HashMap<String, ServerConnectClientThread> hm = ManageServerConnectClientThread.getHm();
+                    Iterator<String> iterator = hm.keySet().iterator();
+                    while(iterator.hasNext()){
+                        //取出在线用户id
+                        String onlineUserId = iterator.next().toString();
+                        if(!onlineUserId.equals(message.getSender())){ //排除群发消息的用户本人
+                            //转发message
+                            ObjectOutputStream oos = new ObjectOutputStream(
+                                    hm.get(onlineUserId). //取出了线程
+                                            getSocket().getOutputStream());
+                            oos.writeObject(message);
+                        }
+                    }
+                    System.out.println("\n" + message.getSender() + "对大家说：" + message.getContent());
 
                 }
                 else{

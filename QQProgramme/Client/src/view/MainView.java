@@ -67,16 +67,20 @@ public class MainView {
 //                    System.out.println("显示在线用户");
                     break;
                 case "2":
-                    System.out.println("群发消息");
+//                    System.out.println("群发消息");
+                    System.out.println("请输入想对大家说的话：");
+                    String broadcastContent = Utility.readString(100);
+                    // 把群发消息发送给服务端
+                    messageClientService.sendMessageToAll(broadcastContent, userId);
                     break;
                 case "3":
 //                    System.out.println("私聊消息");
                     System.out.println("请输入想要聊天的用户（在线）：");
                     String receiverId = Utility.readString(50);
                     System.out.println("请输入想要发送的内容：");
-                    String content =Utility.readString(100);
-                    // TODO 编写一个方法，把私聊消息发送给服务端
-                    messageClientService.sendMessageToOne(content, userId, receiverId);
+                    String privateContent =Utility.readString(100);
+                    // 编写一个方法，把私聊消息发送给服务端
+                    messageClientService.sendMessageToOne(privateContent, userId, receiverId);
                     break;
                 case "4":
                     System.out.println("发送文件");

@@ -8,4 +8,5 @@ public interface MessageType {
     String MESSAGE_GET_ONLINE_FRIEND = "4"; //返回在线用户列表
     String MESSAGE_RETURN_ONLINE_FRIEND = "5";
     String MESSAGE_CLIENT_EXIT = "6"; //客户端请求退出
+    String MESSAGE_TOALL_MES = "7"; //群发消息
 }
