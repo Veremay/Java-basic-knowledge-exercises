@@ -54,6 +54,20 @@ public class ServerConnectClientThread extends Thread{
                     //退出while循环，结束run()方法
                     break;
                 }
+
+                else if(message.getMessageType().equals(MessageType.MESSAGE_COMM_MES)){
+                    System.out.println(message.getSender() + "请求发送消息给" + message.getReceiver());
+                    //返回给客户端
+                    ObjectOutputStream oos =
+                            new ObjectOutputStream(
+                                    ManageServerConnectClientThread.
+                                            getServerConnectClientThread(message.getReceiver()).
+                                            getSocket().
+                                            getOutputStream());
+                    oos.writeObject(message); // 转发
+                    // TODO 如果用户不在线，可以保存到数据库
+
+                }
                 else{
                     System.out.println("其他消息类型...");
                 }
@@ -66,5 +80,9 @@ public class ServerConnectClientThread extends Thread{
     public ServerConnectClientThread(Socket socket, String userId) {
         this.socket = socket;
         this.userId = userId;
+    }
+
+    public Socket getSocket() {
+        return socket;
     }
 }

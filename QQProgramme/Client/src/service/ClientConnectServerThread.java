@@ -36,12 +36,13 @@ public class ClientConnectServerThread extends Thread {
                         System.out.println("用户：" + onlineUsers[i]);
                     }
 
-                }
-
-                else if (message.getMessageType().equals(MessageType.MESSAGE_CLIENT_EXIT)) {
+                } else if (message.getMessageType().equals(MessageType.MESSAGE_CLIENT_EXIT)) {
                     socket.close();
                     //退出while循环，结束run()方法
                     break;
+                } else if (message.getMessageType().equals(MessageType.MESSAGE_COMM_MES)) {
+                    System.out.println("\n" + message.getSender() + "对" + message.getReceiver() + "说：" + message.getContent());
+
                 } else {
                     System.out.println("其他类型message");
                 }

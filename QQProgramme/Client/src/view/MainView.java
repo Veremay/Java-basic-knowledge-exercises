@@ -1,5 +1,6 @@
 package view;
 
+import service.MessageClientService;
 import service.UserClientService;
 import utils.Utility;
 
@@ -14,7 +15,7 @@ public class MainView {
     private boolean loop = true; // 控制是否显示菜单
     private String key = ""; // 接收用户键盘输入
     private UserClientService userClientService = new UserClientService(); // 用于登录服务器
-
+    private MessageClientService messageClientService = new MessageClientService(); //用于发送消息
     // 显示主菜单
     private void mainMenu() {
         while (loop) {
@@ -63,13 +64,19 @@ public class MainView {
                 case "1":
                     // 写一个方法获取在线用户列表
                     userClientService.getOnlineFriendList();
-                    System.out.println("显示在线用户");
+//                    System.out.println("显示在线用户");
                     break;
                 case "2":
                     System.out.println("群发消息");
                     break;
                 case "3":
-                    System.out.println("私聊消息");
+//                    System.out.println("私聊消息");
+                    System.out.println("请输入想要聊天的用户（在线）：");
+                    String receiverId = Utility.readString(50);
+                    System.out.println("请输入想要发送的内容：");
+                    String content =Utility.readString(100);
+                    // TODO 编写一个方法，把私聊消息发送给服务端
+                    messageClientService.sendMessageToOne(content, userId, receiverId);
                     break;
                 case "4":
                     System.out.println("发送文件");
