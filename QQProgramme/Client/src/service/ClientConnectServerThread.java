@@ -3,6 +3,7 @@ package service;
 import common.Message;
 import common.MessageType;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
@@ -47,6 +48,14 @@ public class ClientConnectServerThread extends Thread {
                     //
                     System.out.println("\n" + message.getSender() + "对大家说：" + message.getContent());
 
+                } else if (message.getMessageType().equals(MessageType.MESSAGE_FILE_MES)) {
+                    System.out.println("\n" + message.getSender() + "给你发送文件到本地目录" + message.getDest());
+
+                    //取出message的文件字节数组，通过文件输出流写出到磁盘
+                    FileOutputStream fileOutputStream = new FileOutputStream(message.getDest());
+                    fileOutputStream.write(message.getFileByte());
+                    fileOutputStream.close();
+                    System.out.println("\n 保存文件成功");
                 } else {
                     System.out.println("其他类型message");
                 }

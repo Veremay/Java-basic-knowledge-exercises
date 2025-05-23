@@ -1,5 +1,6 @@
 package view;
 
+import service.FileClientService;
 import service.MessageClientService;
 import service.UserClientService;
 import utils.Utility;
@@ -16,6 +17,8 @@ public class MainView {
     private String key = ""; // 接收用户键盘输入
     private UserClientService userClientService = new UserClientService(); // 用于登录服务器
     private MessageClientService messageClientService = new MessageClientService(); //用于发送消息
+    private FileClientService fileClientService = new FileClientService(); //用于传输文件
+
     // 显示主菜单
     private void mainMenu() {
         while (loop) {
@@ -78,12 +81,19 @@ public class MainView {
                     System.out.println("请输入想要聊天的用户（在线）：");
                     String receiverId = Utility.readString(50);
                     System.out.println("请输入想要发送的内容：");
-                    String privateContent =Utility.readString(100);
+                    String privateContent = Utility.readString(100);
                     // 编写一个方法，把私聊消息发送给服务端
                     messageClientService.sendMessageToOne(privateContent, userId, receiverId);
                     break;
                 case "4":
-                    System.out.println("发送文件");
+//                    System.out.println("发送文件");
+                    System.out.println("请输入想要发送文件的对象（在线）：");
+                    String fileReceiverId = Utility.readString(50);
+                    System.out.println("请输入你想发送的源文件路径：");
+                    String src = Utility.readString(100);
+                    System.out.println("请输入你想发送到的对方的路径：");
+                    String dest = Utility.readString(100);
+                    fileClientService.sendFileToOne(src, dest, userId, fileReceiverId);
                     break;
                 case "9":
                     System.out.println("退出系统");
